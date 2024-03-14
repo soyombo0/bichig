@@ -1,0 +1,49 @@
+version: "3.9"
+
+name: bichig_chat
+
+services:
+    app:
+        container_name: app
+        build: ./php
+        ports:
+            - "9000:9000"
+        volumes:
+            - ./php/php.ini:/usr/local/etc/php/conf.d/custom.ini
+            - ./../:/var/www
+        working_dir: /var/www
+        networks:
+            - backend
+    nginx:
+        container_name: nginx
+        image: nginx:latest
+        ports:
+            - "80:80"
+        volumes:
+            - ./nginx/conf.d/:/etc/nginx/conf.d
+            - ./../:/var/www
+        networks:
+            - backend
+    db:
+        container_name: db
+        image: mysql:latest
+        ports:
+            - "3306:3306"
+        networks:
+            - backend
+        volumes:
+            - ./mysql/data:/var/lib/mysql
+        environment:
+            MYSQL_DATABASE: bichig
+            MYSQL_ROOT_PASSWORD: password
+    redis:
+        container_name: redis
+        image: redis:latest
+        ports:
+            - "6379:6379"
+        networks:
+            - backend
+
+networks:
+    backend:
+        name: backend
