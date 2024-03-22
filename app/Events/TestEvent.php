@@ -14,20 +14,20 @@ class TestEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $test;
+    public $message;
 
-    public function __construct($test)
+    public function __construct($message)
     {
-        $this->test = $test;
-    }
-
-    public function broadcastAs(): string
-    {
-        return 'test.created';
+        $this->message = $message;
     }
 
     public function broadcastOn()
     {
-        return 'test';
+        return ['my-channel'];
+    }
+
+    public function broadcastAs()
+    {
+        return 'my-event';
     }
 }

@@ -11,7 +11,7 @@ import {Link} from "@inertiajs/vue3";
             <li><Link href="/">About</Link></li>
         </ul>
         <ul class="p-4">
-            </ul>
+        </ul>
     </nav>
 </template>
 
