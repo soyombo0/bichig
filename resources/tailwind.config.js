@@ -2,7 +2,11 @@
 export default {
   content: ["./views/**/*.{vue,js,html}"],
   theme: {
-    extend: {}
+    extend: {
+        fontFamily: {
+            inter: ['Inter', 'black'],
+        }
+    }
   },
   plugins: [],
 }

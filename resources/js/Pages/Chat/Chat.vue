@@ -46,8 +46,8 @@ onUpdated(() => {
 
 <template>
     <div class="flex h-5/6">
-        <div class="flex-initial w-full flex flex-col justify-center items-center">
-            <div class="flex flex-col flex-grow w-full max-w-xl bg-gray-800 shadow-xl rounded-l-lg  overflow-hidden">
+        <div class="w-full flex flex-col justify-center items-center shadow">
+            <div class="flex flex-col flex-grow w-full max-w-xl bg-gray-800 bg-opacity-70 shadow-xl rounded-l-lg  overflow-hidden">
                 <div class="flex flex-col flex-grow h-10 p-4 overflow-auto">
                         <Messages :messages="sentMessages"></Messages>
                         <div ref="bottomRef"></div>
@@ -55,26 +55,24 @@ onUpdated(() => {
             </div>
         </div>
 
-        <div class="flex h-full">
-            <form @submit.prevent class="flex">
-                <div class="flex-none w-24 flex flex-col bg-gray-800 p-4 border border-gray-700 rounded-r-lg">
-                    <input
-                        v-model="messageInput"
-                        id="inputMessage"
-                        class="basis-11/12 flex items-center h-10 rounded-xl px-3 text-sm bg-gray-800 text-white p-3 border border-gray-700 hover:border-sky-400"
-                        type="text"
-                        placeholder="ᠶᠤᠮ ᠪᠢᠴᠢᠭᠡᠷᠡᠢ"
-                    >
-                    <button
-                        @click="sendMessage"
-                        type="submit"
-                        class="basis-1/12 mt-1 rounded-xl text-white hover:text-sky-500"
-                    >
-                        <PaperAirplaneIcon></PaperAirplaneIcon>
-                    </button>
-                </div>
-            </form>
-        </div>
+        <form @submit.prevent class="flex shadow">
+            <div class="flex-none text-center w-24 flex flex-col justify-between bg-gray-800 bg-opacity-70 px-4 py-2 rounded-r-lg">
+                <input
+                    v-model="messageInput"
+                    id="inputMessage"
+                    class="flex-1 flex items-center h-10 rounded-xl text-sm bg-gray-800 text-white p-3 border border-gray-700"
+                    type="text"
+                    placeholder="ᠶᠤᠮ ᠪᠢᠴᠢᠭᠡᠷᠡᠢ"
+                >
+                <button
+                    @click="sendMessage"
+                    type="submit"
+                    class="mt-2 text-gray-700 hover:text-sky-500"
+                >
+                    <box-icon type='regular' color="#ACA8A8" name='send' size="md" animation="tada-hover"></box-icon>
+                </button>
+            </div>
+        </form>
     </div>
 </template>
 
@@ -90,7 +88,6 @@ onUpdated(() => {
     -o-writing-mode: vertical-lr;
     -ms-writing-mode: tb-lr;
     writing-mode: tb-lr;
-    -webkit-text-orientation: sideways-right;
 }
 *:focus {
     outline: none;
