@@ -1,10 +1,12 @@
 <script setup>
-import {onMounted, ref} from "vue";
+import {onMounted, ref, onUpdated} from "vue";
 import axios from "axios";
+import Message from "./Message.vue";
+import Messages from "./Messages.vue";
 
-
+const me = ref(false);
 const sentMessages = ref([]);
-const receivedMessages = ref([]);
+// const receivedMessages = ref([]);
 const messageInput = ref("");
 
 var pusher = new Pusher('d32f9b0ea3e5bd4c67d9', {
@@ -14,7 +16,7 @@ var pusher = new Pusher('d32f9b0ea3e5bd4c67d9', {
 onMounted(() => {
     var channel = pusher.subscribe('my-channel');
     channel.bind('my-event', function(data) {
-        receivedMessages.value.push(data.message)
+        sentMessages.value.push(data.message)
     });
 });
 
@@ -26,7 +28,10 @@ function sendMessage() {
             'X-Socket-Id': pusher.connection.socket_id
         }
     }).then(() => {
-        sentMessages.value.push(messageInput.value)
+        sentMessages.value.push({
+            message: messageInput.value,
+            me: true
+        })
         messageInput.value = "";
     })
 }
@@ -34,54 +39,33 @@ function sendMessage() {
 </script>
 
 <template>
-    <div class="flex">
-        <div class="flex-initial w-96 flex flex-col justify-center items-center min-h-dvh">
+    <div class="flex h-5/6 mt-11">
+        <div class="flex-initial w-full h-4/5 flex flex-col justify-center items-center">
             <div class="flex flex-col flex-grow w-full max-w-xl bg-gray-800 shadow-xl rounded-l-lg  overflow-hidden">
                 <div class="flex flex-col flex-grow h-10 p-4 overflow-auto">
-                    <div class="flex w-full mt-2 space-x-3 max-w-xs">
-                            <ul class="">
-                                <li id="rMessage"
-                                    class="mt-2 text-sm text-white bg-gray-700 p-3 rounded-r-lg rounded-bl-lg"
-                                    v-for="(receivedMessage, rIndex) in receivedMessages"
-                                    :key="rIndex"
-                                >
-                                    {{ receivedMessage }}
-                                </li>
-                            </ul>
-                    </div>
-                    <div class="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
-                        <div>
-                            <ul>
-                                <li id="inputMessage"
-                                    class="mt-2 text-sm bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg"
-                                    v-for="(message, index) in sentMessages"
-                                    :key="index"
-                                >
-                                        {{ message }}
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                        <Messages :me="me" :messages="sentMessages"></Messages>
                 </div>
             </div>
         </div>
 
-        <div class="flex-none w-24 flex flex-col bg-gray-800 p-4 border border-gray-700 rounded-r-lg">
-            <input
-                v-model="messageInput"
-                id="inputMessage"
-                class="basis-11/12 flex items-center h-10 rounded-xl px-3 text-sm bg-gray-800 text-white p-3 border border-gray-700 hover:border-sky-400"
-                type="text"
-                placeholder="ᠶᠤᠮ ᠪᠢᠴᠢᠭᠡᠷᠡᠢ"
-            >
-            <button
-                @click="sendMessage"
-                type="submit"
-                class="basis-1/12 mt-6 rounded-xl bg-gray-600 text-white shadow hover:bg-sky-400"
-            >
-                Send
-            </button>
-        </div>
+        <form @submit.prevent class="flex h-4/5">
+            <div class="flex-none w-24 flex flex-col bg-gray-800 p-4 border border-gray-700 rounded-r-lg">
+                <input
+                    v-model="messageInput"
+                    id="inputMessage"
+                    class="basis-11/12 flex items-center h-10 rounded-xl px-3 text-sm bg-gray-800 text-white p-3 border border-gray-700 hover:border-sky-400"
+                    type="text"
+                    placeholder="ᠶᠤᠮ ᠪᠢᠴᠢᠭᠡᠷᠡᠢ"
+                >
+                <button
+                    @click="sendMessage"
+                    type="submit"
+                    class="basis-1/12 mt-6 rounded-xl bg-gray-600 text-white shadow hover:bg-sky-400"
+                >
+                    Send
+                </button>
+            </div>
+        </form>
     </div>
 
 </template>
@@ -116,5 +100,4 @@ function sendMessage() {
 *:focus {
     outline: none;
 }
-
 </style>
