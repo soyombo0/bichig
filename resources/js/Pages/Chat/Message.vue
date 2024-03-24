@@ -1,9 +1,6 @@
 <script setup>
 
-import {onUpdated} from "vue";
-
 const props = defineProps({
-    me: Boolean,
     message: String,
 });
 

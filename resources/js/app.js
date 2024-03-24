@@ -1,6 +1,7 @@
 import { createApp, h } from 'vue'
 import {createInertiaApp} from '@inertiajs/vue3'
 import Layout from "./Pages/Shared/Layout.vue";
+import 'boxicons';
 
 const app = createInertiaApp({
     resolve: name => {
