@@ -1,71 +1,95 @@
 <script setup>
-import {useForm} from "@inertiajs/vue3";
+import {onMounted, ref, onUpdated} from "vue";
+import axios from "axios";
+import Messages from "./Messages.vue";
+import {PaperAirplaneIcon} from "@heroicons/vue/16/solid/index.js";
 
-const form = useForm({
-   message: null
+const sentMessages = ref([]);
+const messageInput = ref("");
+
+var pusher = new Pusher('d32f9b0ea3e5bd4c67d9', {
+    cluster: 'ap3'
 });
 
+onMounted(() => {
+    var channel = pusher.subscribe('my-channel');
+    channel.bind('my-event', function(data) {
+        sentMessages.value.push(data.message)
+    });
+});
+
+function sendMessage() {
+    if (messageInput.value) {
+        axios.post('/button', {
+            message: messageInput.value
+        }, {
+            headers: {
+                'X-Socket-Id': pusher.connection.socket_id
+            }
+        }).then(() => {
+            sentMessages.value.push({
+                message: messageInput.value,
+                me: true
+            })
+            messageInput.value = "";
+        });
+    }
+}
+
+const bottomRef = ref(null);
+
+onUpdated(() => {
+    bottomRef.value.scrollIntoView({ behavior: 'smooth' });
+});
 
 </script>
 
 <template>
-
-    <div class="flex flex-col justify-center p-1 items-center min-h-dvh">
-        <div class="flex flex-col flex-grow w-full max-w-xl bg-gray-800 shadow-xl rounded-lg overflow-hidden">
-            <div class="flex flex-col flex-grow h-0 p-4 overflow-auto">
-                <div class="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
-                    <div>
-                        <div class="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg">
-                            <p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                        </div>
-                        <span class="text-xs text-gray-500 leading-none">2 min ago</span>
-                    </div>
+    <div class="flex h-5/6 w-full max-w-xl bg-gray-800 bg-opacity-70 shadow-xl rounded-lg ml-12 mt-1">
+        <div class="w-full flex flex-col justify-center items-center shadow">
+            <div class="flex flex-col flex-grow w-full max-w-xl bg-gray-800 bg-opacity-70 shadow-xl rounded-l-lg  overflow-hidden">
+                <div class="flex flex-col flex-grow h-10 p-4 overflow-auto">
+                        <Messages :messages="sentMessages"></Messages>
+                        <div ref="bottomRef"></div>
                 </div>
-                <div class="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
-                    <div>
-                        <div class="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg">
-                            <p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
-                        </div>
-                        <span class="text-xs text-gray-500 leading-none">2 min ago</span>
-                    </div>
-                </div>
-                <div class="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
-                    <div>
-                        <div class="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg">
-                            <p class="text-sm">Lorem ipsum dolor sit amet.</p>
-                        </div>
-                        <span class="text-xs text-gray-500 leading-none">2 min ago</span>
-                    </div>
-                </div>
-                <div class="flex w-full mt-2 space-x-3 max-w-xs">
-                    <div>
-                        <div class="bg-gray-300 p-3 rounded-r-lg rounded-bl-lg">
-                            <p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                        </div>
-                        <span class="text-xs text-gray-500 leading-none">2 min ago</span>
-                    </div>
-                </div>
-                <div class="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
-                    <div>
-                        <div class="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg">
-                            <p class="text-sm">Lorem ipsum dolor sit.</p>
-                        </div>
-                        <span class="text-xs text-gray-500 leading-none">2 min ago</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-gray-800 p-4 border border-gray-700">
-                <form @submit.prevent="form.post('/button', {preserveScroll: true, preserveState: false})" class="flex" preserve-scroll>
-                    <input v-model="form.message" class="flex items-center h-10 w-full rounded-xl px-3 text-sm" type="text" placeholder="Type your message…">
-                    <button type="submit" :disabled="form.processing" class="rounded-xl bg-gray-600 text-white ml-6 w-1/4 shadow">Send</button>
-                </form>
             </div>
         </div>
-    </div>
 
+        <form @submit.prevent class="flex">
+            <div class="flex-none text-center w-24 flex flex-col justify-between px-4 py-2 pb-1 rounded-r-lg">
+                <input
+                    v-model="messageInput"
+                    id="inputMessage"
+                    class="flex-1 flex items-center h-10 rounded-xl text-sm bg-gray-800 text-white p-3 border border-gray-700"
+                    type="text"
+                    placeholder="ᠶᠤᠮ ᠪᠢᠴᠢᠭᠡᠷᠡᠢ"
+                >
+                <button
+                    @click="sendMessage"
+                    type="submit"
+                    class="mt-2 text-gray-700 hover:text-sky-500"
+                >
+                    <box-icon type='regular' color="#ACA8A8" name='send' size="md" animation="tada-hover"></box-icon>
+                </button>
+            </div>
+        </form>
+    </div>
 </template>
 
 <style scoped>
-
+#inputMessage {
+    float: right;
+    clear: both;
+    overflow: auto;
+    font-size: 25px;
+    -moz-writing-mode: vertical-lr;
+    writing-mode: vertical-lr;
+    -webkit-writing-mode: vertical-lr;
+    -o-writing-mode: vertical-lr;
+    -ms-writing-mode: tb-lr;
+    writing-mode: tb-lr;
+}
+*:focus {
+    outline: none;
+}
 </style>
