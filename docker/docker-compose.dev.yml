@@ -15,16 +15,16 @@ services:
         working_dir: /var/www
         networks:
             - backend
-            - nginx_proxy_manager_default  
     nginx:
         container_name: nginx
         image: nginx:latest
+        ports:
+            - "80:80"
         volumes:
             - ./nginx/conf.d/:/etc/nginx/conf.d
             - ./../:/var/www
         networks:
             - backend
-            - nginx_proxy_manager_default  
     db:
         container_name: db
         image: mysql:latest
@@ -46,7 +46,5 @@ services:
             - backend
 
 networks:
-    backend:
-        name: backend
-    nginx_proxy_manager_default:
-        external: true      
+  backend:
+    name: backend

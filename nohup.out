@@ -1,0 +1,22 @@
+  2024-03-25 19:29:38 App\Events\MessageEvent ........................ RUNNING
+  2024-03-25 19:29:38 App\Events\MessageEvent .................. 678.27ms DONE
+  2024-03-25 19:29:38 App\Events\MessageEvent ........................ RUNNING
+  2024-03-25 19:29:39 App\Events\MessageEvent .................. 275.72ms DONE
+  2024-03-25 22:04:58 App\Events\MessageEvent ........................ RUNNING
+  2024-03-25 22:04:59 App\Events\MessageEvent .................. 849.60ms DONE
+  2024-03-25 22:05:01 App\Events\MessageEvent ........................ RUNNING
+  2024-03-25 22:05:02 App\Events\MessageEvent .................. 839.75ms DONE
+  2024-03-25 22:05:18 App\Events\MessageEvent ........................ RUNNING
+  2024-03-25 22:05:18 App\Events\MessageEvent .................. 299.56ms DONE
+  2024-03-25 22:05:24 App\Events\MessageEvent ........................ RUNNING
+  2024-03-25 22:05:25 App\Events\MessageEvent .................. 334.48ms DONE
+  2024-03-25 22:09:10 App\Events\MessageEvent  2024-03-25 22:09:10 App\Events\MessageEvent ........................ ........................ RUNNING
+ RUNNING
+  2024-03-25 22:09:11 App\Events\MessageEvent .................. 672.84ms DONE
+  2024-03-25 22:09:11 App\Events\MessageEvent .................. 673.54ms DONE
+  2024-03-25 22:09:11 App\Events\MessageEvent ........................ RUNNING
+  2024-03-25 22:09:11 App\Events\MessageEvent ........................ RUNNING
+  2024-03-25 22:09:11 App\Events\MessageEvent .................. 266.11ms  2024-03-25 22:09:11 App\Events\MessageEvent .................. 265.62ms DONE
+ DONE
+  2024-03-25 23:32:59 App\Events\MessageEvent ........................ RUNNING
+  2024-03-25 23:33:00 App\Events\MessageEvent .................. 755.62ms DONE
