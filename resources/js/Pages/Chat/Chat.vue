@@ -7,7 +7,7 @@ import {PaperAirplaneIcon} from "@heroicons/vue/16/solid/index.js";
 const sentMessages = ref([]);
 const messageInput = ref("");
 
-var pusher = new Pusher('d32f9b0ea3e5bd4c67d9', {
+var pusher = new Pusher('435d347977604717dd0d', {
     cluster: 'ap3'
 });
 

@@ -4,7 +4,7 @@ version: "3.9"
 services:
     app:
         container_name: app
-        build: 
+        build:
           context: ./php
           network: host
         ports:
@@ -12,10 +12,10 @@ services:
         volumes:
             - ./php/php.ini:/usr/local/etc/php/conf.d/custom.ini
             - ./../:/var/www
+            - ./supervisor/conf.d/laravel-worker.conf:/etc/supervisor/conf.d/laravel-worker.conf
         working_dir: /var/www
         networks:
             - backend
-            - nginx_proxy_manager_default  
     nginx:
         container_name: nginx
         image: nginx:latest
@@ -24,7 +24,8 @@ services:
             - ./../:/var/www
         networks:
             - backend
-            - nginx_proxy_manager_default  
+        ports:
+            - "80:80"
     db:
         container_name: db
         image: mysql:latest
@@ -48,5 +49,3 @@ services:
 networks:
     backend:
         name: backend
-    nginx_proxy_manager_default:
-        external: true      
