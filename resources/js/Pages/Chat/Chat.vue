@@ -45,7 +45,7 @@ onUpdated(() => {
 </script>
 
 <template>
-    <div class="flex h-5/6 w-full max-w-xl bg-gray-800 bg-opacity-70 shadow-xl rounded-lg ml-12 mt-1">
+    <div class="chat-box flex w-full max-w-xl bg-gray-800 bg-opacity-70 shadow-xl rounded-lg mt-1">
         <div class="w-full flex flex-col justify-center items-center shadow">
             <div class="flex flex-col flex-grow w-full max-w-xl bg-gray-800 bg-opacity-70 shadow-xl rounded-l-lg  overflow-hidden">
                 <div class="flex flex-col flex-grow h-10 p-4 overflow-auto">
@@ -77,6 +77,11 @@ onUpdated(() => {
 </template>
 
 <style scoped>
+
+.chat-box {
+    height: 85vh;
+}
+
 #inputMessage {
     float: right;
     clear: both;

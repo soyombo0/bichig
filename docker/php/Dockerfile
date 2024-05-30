@@ -5,7 +5,7 @@ COPY docker.conf /usr/local/etc/php-fpm.d/docker.conf
 COPY .bashrc /root/
 
 RUN apt-get update \
-  && apt-get install -y build-essential zlib1g-dev default-mysql-client curl gnupg procps vim git unzip libzip-dev libpq-dev \
+  && apt-get install -y build-essential zlib1g-dev default-mysql-client curl gnupg procps vim git unzip libzip-dev libpq-dev supervisor \
   && docker-php-ext-install zip pdo_mysql pdo_pgsql pgsql
 
 RUN apt-get install -y libicu-dev \
@@ -30,7 +30,6 @@ RUN pecl install pcov && docker-php-ext-enable pcov
 RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
 RUN apt-get install -y nodejs
 RUN npm install npm@latest -g
-RUN npm install yarn -g
 
 # Composer
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"

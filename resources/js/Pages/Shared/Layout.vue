@@ -8,7 +8,7 @@ import Nav from "./Nav.vue";
         <Nav></Nav>
 
         <section>
-            <div class="max-w-2xl mx-auto">
+            <div class="flex justify-center">
                 <slot />
             </div>
         </section>
