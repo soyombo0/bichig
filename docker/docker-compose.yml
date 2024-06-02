@@ -51,7 +51,7 @@ services:
         image: serversideup/php:8.3-fpm
         volumes:
             - ./../:/var/www
-        command: [ "php", "/var/www/artisan", "horizon" ]
+        command: ["php", "/var/www/artisan", "queue:work", "--tries=3"]
         environment:
             PHP_FPM_POOL_NAME: "bichig_chat_horizon"
         depends_on:
