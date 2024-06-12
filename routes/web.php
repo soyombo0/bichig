@@ -6,6 +6,7 @@ use App\Http\Controllers\ChatController;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Client\Request;
+
 Route::get('/', function () {
     return inertia('Index');
 })->name('about');
@@ -22,5 +23,8 @@ Route::get('/contact', function () {
 Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');
 
 Route::prefix('auth')->group(function () {
-    Route::get('/signup', [AuthController::class, 'index'])->name('auth.signup');
+    Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
+    Route::get('/register', [AuthController::class, 'register'])->name('auth.register');
+    Route::post('/signup', [AuthController::class, 'signup'])->name('auth.signup');
+    Route::post('/signin', [AuthController::class, 'signin'])->name('auth.signin');
 });

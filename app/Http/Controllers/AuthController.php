@@ -8,12 +8,17 @@ use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-    public function index()
+    public function login()
     {
-        return inertia('SignUp');
+        return inertia('Auth/Login');
     }
 
-    public function register(RegisterRequest $request)
+    public function register()
+    {
+        return inertia('Auth/Register');
+    }
+
+    public function signup(RegisterRequest $request)
     {
         $data = $request->validated();
         $user = User::query()->create([
@@ -22,10 +27,10 @@ class AuthController extends Controller
             'password' => bcrypt($data['password'])
         ]);
 
-        return $user;
+        return to_route('about');
     }
 
-    public function login(Request $request)
+    public function signin(Request $request)
     {
         $credentials = $request->only('email', 'password');
 
@@ -33,5 +38,6 @@ class AuthController extends Controller
             return redirect()->with(['error' => 'The password or email is wrong']);
         }
 
+        return to_route('Index');
     }
 }

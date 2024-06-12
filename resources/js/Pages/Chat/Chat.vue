@@ -51,29 +51,29 @@ onUpdated(() => {
                 <div class="flex flex-col flex-grow h-10 p-4 overflow-auto">
                         <Messages :messages="sentMessages"></Messages>
                         <div ref="bottomRef"></div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <form @submit.prevent class="flex">
-            <div class="flex-none text-center w-24 flex flex-col justify-between px-4 py-2 pb-1 rounded-r-lg">
-                <input
-                    v-model="messageInput"
-                    id="inputMessage"
-                    class="flex-1 flex items-center h-10 rounded-xl text-sm bg-gray-800 text-white p-3 border border-gray-700"
-                    type="text"
-                    placeholder="ᠶᠤᠮ ᠪᠢᠴᠢᠭᠡᠷᠡᠢ"
-                >
-                <button
-                    @click="sendMessage"
-                    type="submit"
-                    class="mt-2 text-gray-700 hover:text-sky-500"
-                >
-                    <box-icon type='regular' color="#ACA8A8" name='send' size="md" animation="tada-hover"></box-icon>
-                </button>
-            </div>
-        </form>
-    </div>
+            <form @submit.prevent class="flex">
+                <div class="flex-none text-center w-24 flex flex-col justify-between px-4 py-2 pb-1 rounded-r-lg">
+                    <input
+                        v-model="messageInput"
+                        id="inputMessage"
+                        class="flex-1 flex items-center h-10 rounded-xl text-sm bg-gray-800 text-white p-3 border border-gray-700"
+                        type="text"
+                        placeholder="ᠶᠤᠮ ᠪᠢᠴᠢᠭᠡᠷᠡᠢ"
+                    >
+                    <button
+                        @click="sendMessage"
+                        type="submit"
+                        class="mt-2 text-gray-700 hover:text-sky-500"
+                    >
+                        <box-icon type='regular' color="#ACA8A8" name='send' size="md" animation="tada-hover"></box-icon>
+                    </button>
+                </div>
+            </form>
+        </div>
 </template>
 
 <style scoped>
