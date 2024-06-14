@@ -1,18 +1,28 @@
 <script setup>
-import {onMounted, ref, onUpdated} from "vue";
-import axios from "axios";
+import {Link, useForm} from "@inertiajs/vue3";
 
+let form = useForm({
+    email: '',
+    password: ''
+});
+
+let submit = () => {
+    form.post('/auth/signin');
+};
 </script>
 
 <template>
-    <div class="m-auto text-center bg-gray-800 bg-opacity-70 p-12 rounded-lg block shadow">
+    <div class="mt-40 m-auto text-center bg-gray-800 bg-opacity-70 p-12 rounded-lg block shadow">
         <h1 class="text-white text-5xl"></h1>
-        <form>
+        <form @submit.prevent="submit">
             <div class="grid gap-4">
-                <input class="rounded-lg text-sm bg-gray-800 text-white p-3 border border-gray-700" v-model="length" name="email" type="email" placeholder="Enter email">
-                <input class="rounded-lg text-sm bg-gray-800 text-white p-3 border border-gray-700" name="password" type="password" placeholder="Enter password">
+                <input class="rounded-lg text-sm bg-gray-800 text-white p-3 border border-gray-700" v-model="form.email" name="email" type="email" placeholder="Enter email">
+                <input class="rounded-lg text-sm bg-gray-800 text-white p-3 border border-gray-700" v-model="form.password" name="password" type="password" placeholder="Enter password">
             </div>
-            <button class="p-2 text-white m-7 bg-sky-500 rounded-xl hover:bg-sky-400" v-on:submit="" type="submit">Sign In</button>
+            <div class="grid">
+                <Link href="/auth/register" class="text-white mt-2 hover:text-sky-500 text-sm">Don't have account yet?</Link>
+                <button class="p-2 px-12 text-white mx-7 mt-2 bg-sky-500 rounded-2xl hover:bg-sky-700" type="submit">Sign In</button>
+            </div>
         </form>
     </div>
 </template>

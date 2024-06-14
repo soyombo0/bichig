@@ -26,3 +26,7 @@ php artisan migrate
 clear
 php artisan key:generate
 exit
+php artisan key:generate
+php artisan migrate
+npm run build
+exit

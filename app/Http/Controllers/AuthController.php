@@ -5,16 +5,23 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
     public function login()
     {
+        if ((auth()->check())) {
+            return redirect('/');
+        }
         return inertia('Auth/Login');
     }
 
     public function register()
     {
+        if ((auth()->check())) {
+            return redirect('/');
+        }
         return inertia('Auth/Register');
     }
 
@@ -27,17 +34,38 @@ class AuthController extends Controller
             'password' => bcrypt($data['password'])
         ]);
 
-        return to_route('about');
+        Auth::login($user);
+        $request->session()->regenerate();
+
+        return redirect('/');
     }
 
     public function signin(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
 
-        if (!auth()->attempt($credentials)) {
-            return redirect()->with(['error' => 'The password or email is wrong']);
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return redirect()->intended();
         }
 
-        return to_route('Index');
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->onlyInput('email');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/');
     }
 }

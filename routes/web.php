@@ -3,6 +3,7 @@
 use App\Events\MessageEvent;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\UserController;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Client\Request;
@@ -22,9 +23,14 @@ Route::get('/contact', function () {
 
 Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');
 
+Route::middleware('auth')->group(function (Router $router) {
+    $router->get('/user', [UserController::class, 'create'])->name('user');
+});
+
 Route::prefix('auth')->group(function () {
-    Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
+    Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::get('/register', [AuthController::class, 'register'])->name('auth.register');
     Route::post('/signup', [AuthController::class, 'signup'])->name('auth.signup');
     Route::post('/signin', [AuthController::class, 'signin'])->name('auth.signin');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 });

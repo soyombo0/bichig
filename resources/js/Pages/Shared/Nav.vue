@@ -1,6 +1,9 @@
 <script setup>
-import {Link} from "@inertiajs/vue3";
+import {Link, usePage} from "@inertiajs/vue3";
+import { computed } from 'vue';
 
+const page = usePage()
+const user = computed(() => page.props.auth.user);
 </script>
 <template>
     <nav class="flex align-middle p-5 justify-between font-medium text-white">
@@ -11,7 +14,8 @@ import {Link} from "@inertiajs/vue3";
             <li class="hover:text-sky-500"><Link href="/">Home</Link></li>
         </ul>
 
-       <Link href="/contact" class="hover:text-sky-500">Contact</Link>
+        <Link href="/user" class="hover:text-sky-500" v-if="user">{{ user.name }}</Link>
+        <Link href="/auth/login" class="hover:text-sky-500" v-else>Sign In</Link>
     </nav>
 </template>
 

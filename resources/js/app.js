@@ -11,7 +11,11 @@ const app = createInertiaApp({
 
         let page = pages[`./Pages/${name}.vue`].default
 
-        page.layout??=Layout;
+        // page.layout ??= Layout;
+
+        if (page.layout === undefined) {
+            page.layout = Layout;
+        }
 
         return pages[`./Pages/${name}.vue`]
     },
