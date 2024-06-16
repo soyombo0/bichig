@@ -43,8 +43,6 @@ class UserController extends Controller
         $data = $request->validated();
         $user = auth()->user();
         $user->update($data);
-//        $user->save();
-//        dd($user->name);
     }
 
     /**
