@@ -25,6 +25,7 @@ Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');
 
 Route::middleware('auth')->group(function (Router $router) {
     $router->get('/user', [UserController::class, 'create'])->name('user');
+    $router->put('/user', [UserController::class, 'update'])->name('user.update');
 });
 
 Route::prefix('auth')->group(function () {
