@@ -20,3 +20,4 @@ yarn-error.log
 /docker/mysql/
 /docker/postgres/
 /.npm/
+/.bash_history
