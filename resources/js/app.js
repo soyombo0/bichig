@@ -3,13 +3,19 @@ import {createInertiaApp} from '@inertiajs/vue3'
 import Layout from "./Pages/Shared/Layout.vue";
 import 'boxicons';
 
+Vue.config.productionTip = false;
+
 const app = createInertiaApp({
     resolve: name => {
         const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
 
         let page = pages[`./Pages/${name}.vue`].default
 
-        page.layout??=Layout;
+        // page.layout ??= Layout;
+
+        if (page.layout === undefined) {
+            page.layout = Layout;
+        }
 
         return pages[`./Pages/${name}.vue`]
     },
