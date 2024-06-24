@@ -21,3 +21,4 @@ yarn-error.log
 /docker/postgres/
 /.npm/
 /.bash_history
+/docker/minio/

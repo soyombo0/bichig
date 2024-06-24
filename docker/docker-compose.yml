@@ -7,7 +7,7 @@ services:
           context: ./php
           network: host
         ports:
-            - "9000:9000"
+            - "8000:8000"
         volumes:
             - ./../:/var/www
         working_dir: /var/www
@@ -49,15 +49,31 @@ services:
             - "6379:6379"
         networks:
             - backend
-    horizon:
+    queue_worker:
+        container_name: queue_worker
         image: serversideup/php:8.3-fpm
         volumes:
             - ./../:/var/www
-        command: [ "php", "/var/www/artisan", "horizon" ]
+        command: ["php", "/var/www/artisan", "queue:work", "--tries=3"]
         environment:
             PHP_FPM_POOL_NAME: "bichig_chat_horizon"
         depends_on:
             - redis
+        networks:
+            - backend
+    minio:
+        container_name: minio
+        image: quay.io/minio/minio
+        command: server /data --console-address ":9001"
+        ports:
+            - "9000:9000"
+            - "9001:9001"
+        volumes:
+            - ./minio/data:/data
+        environment:
+            MINIO_ROOT_USER: "minioadmin"
+            MINIO_ROOT_PASSWORD: "minioadmin"
+            MINIO_DEFAULT_BUCKETS: "bichig"
         networks:
             - backend
 

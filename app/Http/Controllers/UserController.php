@@ -3,10 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserUpdateRequest;
+use App\Http\Services\UserService;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class UserController extends Controller
 {
+    public function __construct(protected UserService $service)
+    {
+    }
+
     public function create()
     {
         return inertia('User/Page');
@@ -51,5 +57,14 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function storePic(Request $request)
+    {
+        $pic = $this->service->storePic($request);
+
+        return inertia('User/Page', [
+            "data" => $pic
+        ]);
     }
 }
