@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Client\Request;
 
 Route::get('/', function () {
-    return inertia('Index');
+    return inertia('Home');
 })->name('about');
 
 Route::post('/button', function (\Illuminate\Http\Request $request) {
@@ -26,6 +26,7 @@ Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');
 Route::middleware('auth')->group(function (Router $router) {
     $router->get('/user', [UserController::class, 'create'])->name('user');
     $router->put('/user', [UserController::class, 'update'])->name('user.update');
+    $router->post('/user/pic', [UserController::class, 'storePic'])->name('user.pic.store');
 });
 
 Route::prefix('auth')->group(function () {

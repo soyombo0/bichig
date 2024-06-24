@@ -1,0 +1,11 @@
+Storage::cloud()->put('/', {"asd": "asd})
+Storage::cloud()->put('/', "sad")
+Storage::cloud()->put('/', "sad")
+Storage::cloud()->put('/', "sad")
+Storage::cloud()->put('/', "sad")
+exit
+Storage::cloud()->put('/', "asdsa")
+Storage::cloud()->put('/', "asdsa")
+Storage::cloud()->put('/', "asdsa")
+Storage::cloud()->put('/', "asdsa")
+Storage::cloud()->put('/', "asdsa")
