@@ -7,7 +7,7 @@ services:
           context: ./php
           network: host
         ports:
-            - "8000:8000"
+            - "9000:9000"
         volumes:
             - ./../:/var/www
         working_dir: /var/www
@@ -61,19 +61,31 @@ services:
             - redis
         networks:
             - backend
-    minio:
-        container_name: minio
-        image: quay.io/minio/minio
-        command: server /data --console-address ":9001"
-        ports:
-            - "9000:9000"
-            - "9001:9001"
+#    minio:
+#        container_name: minio
+#        image: quay.io/minio/minio
+#        command: server /data --console-address ":9001"
+#        ports:
+#            - "9000:9000"
+#            - "9001:9001"
+#        volumes:
+#            - ./minio/data:/data
+#        environment:
+#            MINIO_ROOT_USER: "minioadmin"
+#            MINIO_ROOT_PASSWORD: "minioadmin"
+#            MINIO_DEFAULT_BUCKETS: "bichig"
+#        networks:
+#            - backend
+    reverb:
+        container_name: reverb
+        image: serversideup/php:8.3-fpm
         volumes:
-            - ./minio/data:/data
+            - ./../:/var/www
+        command: ["php", "/var/www/artisan", "reverb:start"]
         environment:
-            MINIO_ROOT_USER: "minioadmin"
-            MINIO_ROOT_PASSWORD: "minioadmin"
-            MINIO_DEFAULT_BUCKETS: "bichig"
+            PHP_FPM_POOL_NAME: "bichig_chat_reverb"
+        ports:
+            - "8080:8080"
         networks:
             - backend
 

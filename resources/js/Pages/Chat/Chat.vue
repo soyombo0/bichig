@@ -2,17 +2,16 @@
 import {onMounted, ref, onUpdated} from "vue";
 import axios from "axios";
 import Messages from "./Messages.vue";
-import {PaperAirplaneIcon} from "@heroicons/vue/16/solid/index.js";
 
 const sentMessages = ref([]);
 const messageInput = ref("");
 
-var pusher = new Pusher('435d347977604717dd0d', {
+var pusher = new Pusher('my-app-key', {
     cluster: 'ap3'
 });
 
 onMounted(() => {
-    var channel = pusher.subscribe('my-channel');
+    let channel = pusher.subscribe('my-channel');
     channel.bind('my-event', function(data) {
         sentMessages.value.push(data.message)
     });
