@@ -10,11 +10,11 @@ import {Link} from "@inertiajs/vue3";
         <h1 class="text-5xl font-bold bg-gradient-to-r from-sky-300 to-sky-500 bg-clip-text text-transparent mt-12 md:mt-0 p-1">Bichig Chat</h1>
 
         <div class="grid grid-cols-5 mt-28 md:mt-40 text-3xl font-bold">
-            <p class="text-sky-400/100 rotate-90 whitespace-nowrap">ᠮᠤᠩᠭᠤᠯ ᠪᠢᠴᠢᠭ ᠢᠢᠡᠷ ᠪᠢᠴᠡᠭᠡᠷᠡᠢ</p>
-            <p class="text-sky-400/75 rotate-90 whitespace-nowrap">ᠮᠤᠩᠭᠤᠯ ᠪᠢᠴᠢᠭ ᠢᠢᠡᠷ ᠪᠢᠴᠡᠭᠡᠷᠡᠢ</p>
-            <p class="text-sky-400/50 rotate-90 whitespace-nowrap">ᠮᠤᠩᠭᠤᠯ ᠪᠢᠴᠢᠭ ᠢᠢᠡᠷ ᠪᠢᠴᠡᠭᠡᠷᠡᠢ</p>
-            <p class="text-sky-400/25 rotate-90 whitespace-nowrap">ᠮᠤᠩᠭᠤᠯ ᠪᠢᠴᠢᠭ ᠢᠢᠡᠷ ᠪᠢᠴᠡᠭᠡᠷᠡᠢ</p>
-            <p class="text-sky-400/10 rotate-90 whitespace-nowrap">ᠮᠤᠩᠭᠤᠯ ᠪᠢᠴᠢᠭ ᠢᠢᠡᠷ ᠪᠢᠴᠡᠭᠡᠷᠡᠢ</p>
+            <p class="text-sky-400/100 rotate-90 whitespace-nowrap">ᠮᠤᠩᠭᠤᠯ ᠪᠢᠴᠢᠭ ᠢᠢᠡᠷ ᠪᠢᠴᠢᠭᠡᠷᠡᠢ</p>
+            <p class="text-sky-400/75 rotate-90 whitespace-nowrap">ᠮᠤᠩᠭᠤᠯ ᠪᠢᠴᠢᠭ ᠢᠢᠡᠷ ᠪᠢᠴᠢᠭᠡᠷᠡᠢ</p>
+            <p class="text-sky-400/50 rotate-90 whitespace-nowrap">ᠮᠤᠩᠭᠤᠯ ᠪᠢᠴᠢᠭ ᠢᠢᠡᠷ ᠪᠢᠴᠢᠭᠡᠷᠡᠢ</p>
+            <p class="text-sky-400/25 rotate-90 whitespace-nowrap">ᠮᠤᠩᠭᠤᠯ ᠪᠢᠴᠢᠭ ᠢᠢᠡᠷ ᠪᠢᠴᠢᠭᠡᠷᠡᠢ</p>
+            <p class="text-sky-400/10 rotate-90 whitespace-nowrap">ᠮᠤᠩᠭᠤᠯ ᠪᠢᠴᠢᠭ ᠢᠢᠡᠷ ᠪᠢᠴᠢᠭᠡᠷᠡᠢ</p>
         </div>
 
         <Link
