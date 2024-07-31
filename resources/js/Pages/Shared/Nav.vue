@@ -12,6 +12,7 @@ const user = computed(() => page.props.auth.user);
         <ul class="flex grid-cols-2 gap-6 md:gap-11 md:mr-10">
             <li class="hover:text-sky-500"><Link href="/chat">Chat</Link></li>
             <li class="hover:text-sky-500"><Link href="/">Home</Link></li>
+            <li class="hover:text-sky-500"><Link href="/learning">Learning</Link></li>
         </ul>
 
         <Link href="/user" class="hover:text-sky-500" v-if="user">{{ user.name }}</Link>

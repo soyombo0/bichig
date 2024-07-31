@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LearningController;
 use App\Http\Controllers\UserController;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
@@ -32,3 +33,7 @@ Route::post('/button', [ChatController::class, 'sendMessage'])->name('send-messa
 
 // Extra routes
 Route::get('/contact', ContactController::class)->name('contact');
+
+Route::prefix('learning')->group(function (Router $router) {
+    $router->get('/', [LearningController::class, 'index'])->name('learning');
+});

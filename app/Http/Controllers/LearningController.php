@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LearningPath;
 use Illuminate\Http\Request;
 
 class LearningController extends Controller
@@ -11,7 +12,9 @@ class LearningController extends Controller
      */
     public function index()
     {
-        //
+        $learnPaths = LearningPath::all();
+
+        return inertia('Learning/Index', compact('learnPaths'));
     }
 
     /**
@@ -22,9 +25,7 @@ class LearningController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
         //
@@ -38,25 +39,16 @@ class LearningController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         //
