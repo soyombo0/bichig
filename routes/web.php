@@ -5,6 +5,7 @@ use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LearningController;
+use App\Http\Controllers\PrivateChatController;
 use App\Http\Controllers\UserController;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,11 @@ Route::get('/', HomeController::class)->name('home');
 Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');
 Route::post('/button', [ChatController::class, 'sendMessage'])->name('send-message');
 
+Route::middleware('auth')->group(function (Router $router) {
+    $router->get('/user/chats', [PrivateChatController::class, 'index'])->name('private.chats.index');
+    $router->post('/chats', [PrivateChatController::class, 'store'])->name('private.chats.store');
+    $router->get('/chats/{chat}', [PrivateChatController::class, 'join'])->name('private.chats.join');
+});
 // Extra routes
 Route::get('/contact', ContactController::class)->name('contact');
 

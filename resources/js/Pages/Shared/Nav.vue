@@ -10,8 +10,8 @@ const user = computed(() => page.props.auth.user);
         <Link href="/" class="text-xl font-bold bg-gradient-to-r from-sky-300 to-sky-500 bg-clip-text text-transparent">Bichig Chat</Link>
 
         <ul class="flex grid-cols-2 gap-6 md:gap-11 md:mr-10">
-            <li class="hover:text-sky-500"><Link href="/chat">Chat</Link></li>
-            <li class="hover:text-sky-500"><Link href="/">Home</Link></li>
+            <li class="hover:text-sky-500"><Link href="/chat">Public Chat</Link></li>
+            <li class="hover:text-sky-500"><Link href="/user/chats">Private Chats</Link></li>
             <li class="hover:text-sky-500"><Link href="/learning">Learning</Link></li>
         </ul>
 

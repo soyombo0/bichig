@@ -1,7 +1,7 @@
 <script setup>
 import {onMounted, ref, onUpdated} from "vue";
 import axios from "axios";
-import Messages from "./Messages.vue";
+import Messages from "./../Chat/Messages.vue"
 
 const sentMessages = ref([]);
 const messageInput = ref("");

@@ -5,9 +5,9 @@
     "keywords": ["laravel", "framework"],
     "license": "MIT",
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "cronitor/cronitor-php": "^1.3",
-        "inertiajs/inertia-laravel": "^1.0",
+        "inertiajs/inertia-laravel": "^2.0",
         "laravel/framework": "^11.0.2",
         "laravel/horizon": "^5.24",
         "laravel/passport": "^12.0",

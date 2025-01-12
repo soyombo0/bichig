@@ -8,6 +8,7 @@ services:
             network: host
         ports:
             - "9000:9000"
+            - "5173:5173"
         volumes:
             - ./../:/var/www
         working_dir: /var/www
@@ -74,18 +75,6 @@ services:
     #            MINIO_DEFAULT_BUCKETS: "bichig"
     #        networks:
     #            - backend
-    reverb:
-        container_name: reverb
-        image: serversideup/php:8.3-fpm
-        volumes:
-            - ./../:/var/www
-        command: [ "php", "/var/www/artisan", "reverb:start" ]
-        environment:
-            PHP_FPM_POOL_NAME: "bichig_chat_reverb"
-        ports:
-            - "8080:8080"
-        networks:
-            - backend
 
 networks:
     backend:

@@ -20,5 +20,7 @@ yarn-error.log
 /docker/mysql/
 /docker/postgres/
 /.npm/
+/.npm
 /.bash_history
 /docker/minio/
+/.config

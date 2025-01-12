@@ -12,9 +12,10 @@ class LearningController extends Controller
      */
     public function index()
     {
-        $learnPaths = LearningPath::all();
-
-        return inertia('Learning/Index', compact('learnPaths'));
+//        $learnPaths = LearningPath::all();
+//
+//        return inertia('Learning/Index', compact('learnPaths'));
+        return inertia('Learning/Index');
     }
 
     /**

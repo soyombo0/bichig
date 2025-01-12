@@ -9,3 +9,6 @@ Storage::cloud()->put('/', "asdsa")
 Storage::cloud()->put('/', "asdsa")
 Storage::cloud()->put('/', "asdsa")
 Storage::cloud()->put('/', "asdsa")
+
+event(new \App\Events\ReverbExampleEvent); 
+exit
