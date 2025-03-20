@@ -10,7 +10,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 
-// User related routes
+// Auth related routes
 Route::prefix('auth')->group(function () {
     Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::get('/register', [AuthController::class, 'register'])->name('auth.register');
@@ -21,6 +21,7 @@ Route::prefix('auth')->group(function () {
 
 Route::middleware('auth')->group(function (Router $router) {
     $router->get('/user', [UserController::class, 'create'])->name('user');
+    $router->get('/users', [UserController::class, 'index'])->name('user.index');
     $router->put('/user', [UserController::class, 'update'])->name('user.update');
     $router->post('/user/pic', [UserController::class, 'storePic'])->name('user.pic.store');
 });

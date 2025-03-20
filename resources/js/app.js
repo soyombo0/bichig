@@ -19,7 +19,7 @@ const app = createInertiaApp({
 
         return pages[`./Pages/${name}.vue`]
     },
-    title: title => `Bichig chat`,
+    title: title => `nueman`,
     setup({ el, App, props, plugin }) {
         createApp({ render: () => h(App, props) })
             .use(plugin)

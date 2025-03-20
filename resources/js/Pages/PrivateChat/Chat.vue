@@ -1,7 +1,8 @@
 <script setup>
-import {onMounted, ref, onUpdated} from "vue";
+import {onMounted, ref, onUpdated, computed} from "vue";
 import axios from "axios";
 import Messages from "./../Chat/Messages.vue"
+import {usePage} from "@inertiajs/vue3";
 
 const sentMessages = ref([]);
 const messageInput = ref("");
@@ -9,6 +10,10 @@ const messageInput = ref("");
 var pusher = new Pusher('435d347977604717dd0d', {
     cluster: 'ap3'
 });
+
+const page = usePage()
+const secondUser = computed(() => page.props);
+const user = computed(() => page.props.auth.user);
 
 onMounted(() => {
     let channel = pusher.subscribe('my-channel');
@@ -48,31 +53,31 @@ onUpdated(() => {
         <div class="w-full flex flex-col justify-center items-center shadow">
             <div class="flex flex-col flex-grow w-full max-w-xl bg-gray-800 bg-opacity-70 shadow-xl rounded-l-lg  overflow-hidden">
                 <div class="flex flex-col flex-grow h-10 p-4 overflow-auto">
-                        <Messages :messages="sentMessages"></Messages>
-                        <div ref="bottomRef"></div>
-                    </div>
+                    <Messages :messages="sentMessages"></Messages>
+                    <div ref="bottomRef"></div>
                 </div>
             </div>
-
-            <form @submit.prevent class="flex">
-                <div class="flex-none text-center w-24 flex flex-col justify-between px-4 py-2 pb-1 rounded-r-lg">
-                    <input
-                        v-model="messageInput"
-                        id="inputMessage"
-                        class="flex-1 flex items-center h-10 rounded-xl text-sm bg-gray-800 text-white p-3 border border-gray-700"
-                        type="text"
-                        placeholder="ᠶᠤᠮ ᠪᠢᠴᠢᠭᠡᠷᠡᠢ"
-                    >
-                    <button
-                        @click="sendMessage"
-                        type="submit"
-                        class="mt-2 text-gray-700 hover:text-sky-500"
-                    >
-                        <box-icon type='regular' color="#ACA8A8" name='send' size="md" animation="tada-hover"></box-icon>
-                    </button>
-                </div>
-            </form>
         </div>
+
+        <form @submit.prevent class="flex">
+            <div class="flex-none text-center w-24 flex flex-col justify-between px-4 py-2 pb-1 rounded-r-lg">
+                <input
+                    v-model="messageInput"
+                    id="inputMessage"
+                    class="flex-1 flex items-center h-10 rounded-xl text-sm bg-gray-800 text-white p-3 border border-gray-700"
+                    type="text"
+                    placeholder="ᠶᠤᠮ ᠪᠢᠴᠢᠭᠡᠷᠡᠢ"
+                >
+                <button
+                    @click="sendMessage"
+                    type="submit"
+                    class="mt-2 text-gray-700 hover:text-sky-500"
+                >
+                    <box-icon type='regular' color="#ACA8A8" name='send' size="md" animation="tada-hover"></box-icon>
+                </button>
+            </div>
+        </form>
+    </div>
 </template>
 
 <style scoped>

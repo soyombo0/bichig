@@ -31,7 +31,9 @@ class PrivateChatController extends Controller
         $chat->users()->attach(auth()->user());
         $chat->users()->attach($secondUser);
 
-        return inertia('PrivateChat/Chat');
+        return inertia('PrivateChat/Chat' , [
+            'secondUser' => $secondUser,
+        ]);
     }
 
     public function destroy(PrivateChat $chat)

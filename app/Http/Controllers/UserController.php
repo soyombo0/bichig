@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserUpdateRequest;
 use App\Http\Services\UserService;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class UserController extends Controller
@@ -22,7 +24,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return User::all()->except(Auth::id());
     }
 
     /**

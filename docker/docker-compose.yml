@@ -3,9 +3,7 @@ version: "3.9"
 services:
     app:
         container_name: app
-        build:
-            context: ./php
-            network: host
+        image: serversideup/php:8.4-fpm
         ports:
             - "9000:9000"
             - "5173:5173"
@@ -15,7 +13,7 @@ services:
         networks:
             - backend
         environment:
-            PHP_FPM_POOL_NAME: "bichig_chat_php"
+            PHP_FPM_POOL_NAME: "nueman_php"
             AUTORUN_ENABLED: true
     nginx:
         container_name: nginx
@@ -50,12 +48,12 @@ services:
             - backend
     queue_worker:
         container_name: queue_worker
-        image: serversideup/php:8.3-fpm
+        image: serversideup/php:8.4-fpm
         volumes:
             - ./../:/var/www
         command: [ "php", "/var/www/artisan", "queue:work", "--tries=3" ]
         environment:
-            PHP_FPM_POOL_NAME: "bichig_chat_horizon"
+            PHP_FPM_POOL_NAME: "nueman_horizon"
         depends_on:
             - redis
         networks:
